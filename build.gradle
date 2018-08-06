@@ -1,0 +1,131 @@
+plugins {
+    id 'java'
+    id 'maven'
+    id 'maven-publish'
+    id 'com.jfrog.bintray' version '1.7.2'
+}
+
+group = 'pw.aru.api'
+version = new Version(major: 1, minor: 0, revision: 0)
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    //HTTP
+    compile 'com.github.natanbc:reliqua:2.3.2'
+
+    //JSON parser
+    compile 'org.json:json:20170516'
+
+    //Logging
+    compile 'org.slf4j:slf4j-api:1.7.25'
+
+    //Code safety
+    compile 'com.google.code.findbugs:jsr305:3.0.2'
+}
+
+import org.apache.tools.ant.filters.ReplaceTokens
+
+task sourcesForRelease(type: Copy) {
+    from 'src/main/java'
+    into 'build/filteredSrc'
+    filter(ReplaceTokens, tokens: [
+        VERSION_MAJOR   : version.getMajor(),
+        VERSION_MINOR   : version.getMinor(),
+        VERSION_REVISION: version.getRevision(),
+        COMMIT_HASH     : getCommitHash()
+    ])
+}
+
+compileJava {
+    source = sourcesForRelease.destinationDir
+    classpath = sourceSets.main.compileClasspath
+
+    options.encoding = 'UTF-8'
+
+    dependsOn sourcesForRelease
+}
+
+jar {
+    baseName = project.name
+    manifest {
+        attributes 'Implementation-Version': version
+    }
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from "${buildDir}/filteredSrc"
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+javadoc {
+    failOnError = false
+    options.memberLevel = JavadocMemberLevel.PUBLIC
+    options.author()
+    options.encoding = 'UTF-8'
+    options.addStringOption('-html5')
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+publishing {
+    publications {
+        BintrayRelease(MavenPublication) {
+            from components.java
+            groupId group
+            artifactId project.name
+            version project.version
+            artifact javadocJar
+            artifact sourcesJar
+        }
+    }
+}
+
+bintray {
+    user = bintrayUsername
+    key = bintrayApiKey
+    publications = ['BintrayRelease']
+    pkg {
+        repo = 'maven'
+        name = project.name
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/arubot/Nekos4J.git'
+        publish = true
+        version {
+            name = project.version
+        }
+    }
+}
+
+bintrayUpload {
+    dependsOn build
+    dependsOn 'publishBintrayReleasePublicationToMavenLocal'
+}
+
+static def getCommitHash() {
+    def p = Runtime.getRuntime().exec("git rev-parse HEAD")
+    p.waitFor()
+    p.getIn().text.trim()
+}
+
+class Version {
+    String major, minor, revision
+
+
+    String toString() {
+        "${major}.${minor}" + (revision == "0" ? "" : ".${revision}")
+    }
+}
