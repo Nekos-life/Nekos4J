@@ -1,7 +1,7 @@
 # Nekos4J
-[ ![Download](https://api.bintray.com/packages/adriantodt/maven/nekos4J/images/download.svg) ](https://bintray.com/adriantodt/maven/Nekos4J/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/adriantodt/maven/nekos4j/images/download.svg) ](https://bintray.com/adriantodt/maven/Nekos4J/_latestVersion)
 
-Java API for DuckDuckGo Instant Answers API
+Java API for Nekos.Life API v2
 
 # Adding to your project
 
@@ -9,17 +9,17 @@ Maven:
 ```xml
 <dependency>
   <groupId>pw.aru.api</groupId>
-  <artifactId>nekos4J</artifactId>
+  <artifactId>nekos4j</artifactId>
   <version>VERSION</version>
   <type>pom</type>
 </dependency>
 ```
 Gradle:
 ```gradle
-compile 'pw.aru.api:nekos4J:VERSION'
+compile 'pw.aru.api:nekos4j:VERSION'
 ```
 
-You can find the latest version [here](https://bintray.com/adriantodt/maven/nekos4J)
+You can find the latest version [here](https://bintray.com/adriantodt/maven/nekos4j)
 
 # Usage
 

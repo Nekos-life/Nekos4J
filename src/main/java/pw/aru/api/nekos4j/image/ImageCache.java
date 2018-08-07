@@ -88,10 +88,6 @@ public interface ImageCache {
      * @param request Returns an input stream to the image for saving.
      * @return An input stream to the image.
      * @throws IOException If an I/O error occurs.
-     * @implNote If the image is not in the cache, this method does the request for the image
-     * and calls {@link #save(String, InputStream) save}, followed by {@link #retrieve(String) retrieve}.
-     * If {@link #retrieve(String) retrieve} returns null, a second request is made to ensure
-     * this method returns a valid image.
      */
     @CheckReturnValue
     @Nonnull
