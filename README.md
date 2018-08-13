@@ -1,5 +1,5 @@
 # Nekos4J
-[ ![Download](https://api.bintray.com/packages/adriantodt/maven/nekos4j/images/download.svg) ](https://bintray.com/adriantodt/maven/Nekos4J/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/adriantodt/maven/nekos4j/images/download.svg) ](https://bintray.com/adriantodt/maven/nekos4j/_latestVersion)
 
 Java API for Nekos.Life API v2
 
