@@ -23,9 +23,9 @@ public interface ImageProvider {
     <T> PendingRequest<T> download(Image image, InputStreamFunction<T> mapper);
 
     /**
-     * Returns the Weeb4J instance associated with this object.
+     * Returns the Nekos4J instance associated with this object.
      *
-     * @return The Weeb4J instance associated with this object.
+     * @return The Nekos4J instance associated with this object.
      */
     @CheckReturnValue
     @Nonnull
