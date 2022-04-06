@@ -2,7 +2,6 @@ plugins {
     id 'java'
     id 'maven'
     id 'maven-publish'
-    id 'com.jfrog.bintray' version '1.7.2'
 }
 
 group = 'pw.aru.api'
@@ -79,35 +78,6 @@ javadoc {
 
 artifacts {
     archives javadocJar, sourcesJar
-}
-
-publishing {
-    publications {
-        BintrayRelease(MavenPublication) {
-            from components.java
-            groupId group
-            artifactId project.name
-            version project.version
-            artifact javadocJar
-            artifact sourcesJar
-        }
-    }
-}
-
-bintray {
-    user = bintrayUsername
-    key = bintrayApiKey
-    publications = ['BintrayRelease']
-    pkg {
-        repo = 'maven'
-        name = project.name
-        licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/arubot/Nekos4J.git'
-        publish = true
-        version {
-            name = project.version
-        }
-    }
 }
 
 bintrayUpload {
