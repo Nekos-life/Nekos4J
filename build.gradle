@@ -2,7 +2,6 @@ plugins {
     id 'java'
     id 'maven'
     id 'maven-publish'
-    id 'com.jfrog.bintray' version '1.7.2'
 }
 
 group = 'pw.aru.api'
@@ -13,12 +12,12 @@ targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
-    jcenter()
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
     //HTTP
-    compile 'com.github.natanbc:reliqua:2.3.2'
+    compile 'com.github.DxsSucuk:reliqua:2.3.2'
 
     //JSON parser
     compile 'org.json:json:20170516'
@@ -28,6 +27,7 @@ dependencies {
 
     //Code safety
     compile 'com.google.code.findbugs:jsr305:3.0.2'
+
 }
 
 import org.apache.tools.ant.filters.ReplaceTokens
@@ -79,40 +79,6 @@ javadoc {
 
 artifacts {
     archives javadocJar, sourcesJar
-}
-
-publishing {
-    publications {
-        BintrayRelease(MavenPublication) {
-            from components.java
-            groupId group
-            artifactId project.name
-            version project.version
-            artifact javadocJar
-            artifact sourcesJar
-        }
-    }
-}
-
-bintray {
-    user = bintrayUsername
-    key = bintrayApiKey
-    publications = ['BintrayRelease']
-    pkg {
-        repo = 'maven'
-        name = project.name
-        licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/arubot/Nekos4J.git'
-        publish = true
-        version {
-            name = project.version
-        }
-    }
-}
-
-bintrayUpload {
-    dependsOn build
-    dependsOn 'publishBintrayReleasePublicationToMavenLocal'
 }
 
 static def getCommitHash() {
