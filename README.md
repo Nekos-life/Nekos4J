@@ -1,5 +1,5 @@
 # Nekos4J
-[ ![Download](https://api.bintray.com/packages/adriantodt/maven/nekos4j/images/download.svg) ](https://bintray.com/adriantodt/maven/nekos4j/_latestVersion)
+[![Jitpack](https://jitpack.io/v/DxsSucuk/Nekos4J.svg)](https://jitpack.io/#DxsSucuk/Nekos4J)
 
 Java API for Nekos.Life API v2
 
@@ -7,8 +7,15 @@ Java API for Nekos.Life API v2
 
 Maven:
 ```xml
+<repositories>
+	<repository>
+	  <id>jitpack.io</id>
+	  <url>https://jitpack.io</url>
+	</repository>
+</repositories>
+
 <dependency>
-  <groupId>pw.aru.api</groupId>
+  <groupId>com.github.DxsSucuk</groupId>
   <artifactId>nekos4j</artifactId>
   <version>VERSION</version>
   <type>pom</type>
@@ -16,10 +23,13 @@ Maven:
 ```
 Gradle:
 ```gradle
-compile 'pw.aru.api:nekos4j:VERSION'
+repositories {
+	maven { url 'https://jitpack.io' }
+}
+compile 'com.github.DxsSucuk:VERSION'
 ```
 
-You can find the latest version [here](https://bintray.com/adriantodt/maven/nekos4j)
+You can find the latest version [here](https://jitpack.io/#DxsSucuk/Nekos4J)
 
 # Usage
 
