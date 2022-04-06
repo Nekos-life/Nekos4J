@@ -12,11 +12,12 @@ targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
     //HTTP
-    compile 'com.github.natanbc:reliqua:2.3.2'
+    compile 'com.github.DxsSucuk:reliqua:2.3.2'
 
     //JSON parser
     compile 'org.json:json:20170516'
@@ -26,6 +27,7 @@ dependencies {
 
     //Code safety
     compile 'com.google.code.findbugs:jsr305:3.0.2'
+
 }
 
 import org.apache.tools.ant.filters.ReplaceTokens
